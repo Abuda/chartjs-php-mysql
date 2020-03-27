@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 23, 2020 at 08:49 PM
+-- Generation Time: Mar 27, 2020 at 10:28 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.3
 
@@ -63,7 +63,31 @@ INSERT INTO `accommodation` (`id`, `destination_id`, `average_price`, `period`) 
 (21, 1, 18, 20),
 (22, 1, 12, 21),
 (23, 1, 10, 22),
-(24, 1, 15, 23);
+(24, 1, 15, 23),
+(49, 2, 18, 0),
+(50, 2, 12, 1),
+(51, 2, 15, 2),
+(52, 2, 9, 3),
+(53, 2, 18, 4),
+(54, 2, 20, 5),
+(55, 2, 14, 6),
+(56, 2, 12, 7),
+(57, 2, 19, 8),
+(58, 2, 10, 9),
+(59, 2, 12, 10),
+(60, 2, 17, 11),
+(61, 2, 12, 12),
+(62, 2, 22, 13),
+(63, 2, 18, 14),
+(64, 2, 13, 15),
+(65, 2, 17, 16),
+(66, 2, 9, 17),
+(67, 2, 14, 18),
+(68, 2, 20, 19),
+(69, 2, 21, 20),
+(70, 2, 16, 21),
+(71, 2, 12, 22),
+(72, 2, 15, 23);
 
 -- --------------------------------------------------------
 
@@ -107,7 +131,11 @@ INSERT INTO `attractions` (`id`, `destination_id`, `name`, `percentage`) VALUES
 (1, 1, 'Museums', 20),
 (2, 1, 'Forests / Parks', 55),
 (3, 1, 'Beaches', 10),
-(4, 1, 'Gardens / Zoos', 15);
+(4, 1, 'Gardens / Zoos', 15),
+(5, 2, 'Museums', 35),
+(6, 2, 'Forests / Parks', 25),
+(7, 2, 'Beaches', 30),
+(8, 2, 'Gardens / Zoos', 10);
 
 -- --------------------------------------------------------
 
@@ -162,7 +190,23 @@ INSERT INTO `tickets` (`id`, `destination_id`, `airline_id`, `price`, `date_orde
 (13, 1, 4, 250, 0),
 (14, 1, 4, 188, 1),
 (15, 1, 4, 210, 2),
-(16, 1, 4, 280, 3);
+(16, 1, 4, 280, 3),
+(17, 2, 1, 250, 0),
+(18, 2, 1, 290, 1),
+(19, 2, 1, 250, 2),
+(20, 2, 1, 200, 3),
+(21, 2, 2, 150, 0),
+(22, 2, 2, 210, 1),
+(23, 2, 2, 270, 2),
+(24, 2, 2, 300, 3),
+(25, 2, 3, 180, 0),
+(26, 2, 3, 220, 1),
+(27, 2, 3, 170, 2),
+(28, 2, 3, 200, 3),
+(29, 2, 4, 280, 0),
+(30, 2, 4, 210, 1),
+(31, 2, 4, 180, 2),
+(32, 2, 4, 250, 3);
 
 --
 -- Indexes for dumped tables
@@ -210,7 +254,7 @@ ALTER TABLE `tickets`
 -- AUTO_INCREMENT for table `accommodation`
 --
 ALTER TABLE `accommodation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT for table `airlines`
@@ -222,7 +266,7 @@ ALTER TABLE `airlines`
 -- AUTO_INCREMENT for table `attractions`
 --
 ALTER TABLE `attractions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `destinations`
@@ -234,7 +278,7 @@ ALTER TABLE `destinations`
 -- AUTO_INCREMENT for table `tickets`
 --
 ALTER TABLE `tickets`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- Constraints for dumped tables
