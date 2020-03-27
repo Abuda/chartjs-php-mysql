@@ -1,6 +1,9 @@
+// initialize day and month variables to curernt date
 var date = new Date();
 var day = date.getDate();
 var month = (date.getMonth()+1);
+
+// global variable to store last received airline data from server
 var ticketsData = null;
 
 $(document).ready(function() {
@@ -15,9 +18,10 @@ $(document).ready(function() {
         animate:"fast",
         step: 10,
         slide: function(event, slider) {
+            // display slider range values
             $("#min-price").html(slider.values[0]);
             $("#max-price").html(slider.values[1]);
-            // filter ticket prices
+            // filter ticket prices, set to zero if does not meet criteria
             // create a deep copy of original ticket prices (do not modify original array of objects)
             var filteredData = $.extend(true, [], ticketsData);
             filteredData.forEach((airline, airlineIndex) => {
@@ -27,11 +31,13 @@ $(document).ready(function() {
                     }
                 });
             });
+            // update tickets chart with filtered values
             BarChart.config.data.datasets = filteredData;
             BarChart.update();
         }
     });
 
+    // populate available destinations from server
     $.getJSON({
         url: "api.php?destinations",
     }).done(function(data) {
@@ -43,25 +49,31 @@ $(document).ready(function() {
 
     $("#destination").selectmenu({
         change: function( event, ui ) {
+            // no destination selected
             if(ui.item.index === 0) {
                 $(".graph-block-graph p").show();
                 $("img.loading-img").hide();
                 $(".graph-block-graph .graph").hide();
+                // stop executing block
                 return null;
             }
+
+            // destination selected
             $(".graph-block-graph p").hide();
             // $(".graph-block-graph .graph").hide();
             // $("img.loading-img").show();
             $.getJSON({
                 url: "api.php?destination=" + ui.item.index,
             }).done(function(data) {
+                // reset slider
                 $('#slider').slider('values',0,0);
                 $('#slider').slider('values',1,1000);
-                ticketsData = data.airlines;
-                BarChart.config.data.datasets = ticketsData;
+                ticketsData = data.airlines; // save airline data to global variable
+                BarChart.config.data.datasets = ticketsData; // set airline chart data to newly received data from server
                 BarChart.update();
-                DoughnutChart.config.data = data.attractions;
+                DoughnutChart.config.data = data.attractions; // set attractions chart data to newly received data from server
                 DoughnutChart.update();
+                // set accommodation chart data to newly received data from server
                 LineChart.config.data.datasets[0].data = data.accommodation[1];
                 LineChart.config.data.datasets[1].data = data.accommodation[0];
                 LineChart.update();
@@ -71,7 +83,7 @@ $(document).ready(function() {
         }
     });
 
-
+    // initialize airline chart
     var ctx1 = document.getElementById('graph1').getContext('2d');
     var data1 = {
         labels: [day + "-" + month, day + 1 + "-" + month, day + 2 + "-" + month, day + 3 + "-" + month],
@@ -82,6 +94,7 @@ $(document).ready(function() {
         data: data1,
         options: {
             tooltips: {
+                // customize tooltips
                 callbacks: {
                     title: function(tooltipItem, data) {
                         return data['labels'][tooltipItem[0]['index']];
@@ -110,6 +123,7 @@ $(document).ready(function() {
         }
     });
 
+    // initialize attractions chart
     var ctx2 = document.getElementById('graph2').getContext('2d');
     var data2 = {
         datasets: [{
@@ -117,7 +131,7 @@ $(document).ready(function() {
             ],
             backgroundColor: [
             ],
-            label: 'Dataset 1'
+            label: ''
         }],
         labels: [
         ]
@@ -127,6 +141,7 @@ $(document).ready(function() {
         data: data2,
         options: {
             tooltips: {
+                // customize tooltips
                 callbacks: {
                     title: function(tooltipItem, data) {
                         return data['labels'][tooltipItem[0]['index']];
@@ -139,9 +154,10 @@ $(document).ready(function() {
         }
     });
 
+    // initialize accommodation chart
     var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-    var thisYearPrices = [18,22,15,8,12,16,13,23,18,12,10,15];
-    var lastYearPrices = [12,19,28,15,18,10,15,18,24,20,10,13];
+    var thisYearPrices = [];
+    var lastYearPrices = [];
     var config = {
         type: 'line',
         data: {
@@ -164,9 +180,10 @@ $(document).ready(function() {
             responsive: true,
             title: {
                 display: false,
-                text: 'Chart.js Line Chart'
+                text: ''
             },
             tooltips: {
+                // customize tooltips
                 callbacks: {
                     title: function(tooltipItem, data) {
                         return data['labels'][tooltipItem[0]['index']];

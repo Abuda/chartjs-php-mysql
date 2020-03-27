@@ -2,7 +2,7 @@
 
 include 'includes/db.php';
 
-
+// send available destinations
 if (isset($_GET['destinations'])) {
     $destinations = [];
     $sth = $pdo->prepare("SELECT * FROM destinations");
@@ -47,18 +47,19 @@ if (isset($_GET['destinations'])) {
   ]
 }
 */
+
+// send specific destination data
 if (isset($_GET['destination'])) {
-    $destinations = [];
-    $response = [];
-    $colors = ["#011627", "#2ec5b6", "#e71d35", "#ff9f1c"];
-    $doughnutColors = ["#f36234", "#2d294f", "#199b8c", "#e81b38", "#e7d44e"];
-    // populate airlines
+    $response = []; // initialize response object
+    $colors = ["#011627", "#2ec5b6", "#e71d35", "#ff9f1c"]; // colors to use for airlines
+    $doughnutColors = ["#f36234", "#2d294f", "#199b8c", "#e81b38", "#e7d44e"]; // colors to use for attractions
+
     $sth = $pdo->prepare("SELECT * FROM destinations WHERE id = :id");
     $id = filter_input(INPUT_GET, 'destination', FILTER_SANITIZE_NUMBER_INT);
     $sth->bindParam(':id', $id, PDO::PARAM_INT);
     $sth->execute();
     $row = $sth->fetch(PDO::FETCH_ASSOC);
-    if ($row) {
+    if ($row) { // if valid destination requested
         $response['airlines'] = [];
         $sth = $pdo->prepare("SELECT * FROM airlines");
         $sth->execute();
