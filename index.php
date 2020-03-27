@@ -6,7 +6,7 @@
         <title></title>
         <title>Chart.js Demo</title>
         <link rel="stylesheet" type="text/css" href="css/style.css">
-        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
         <style>
         </style>
     </head>
@@ -60,9 +60,9 @@
 
             </div>
         </div>
-        <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+        <script src="js/jquery-3.4.1.js"></script>
+        <script src="js/jquery-ui.js"></script>
+        <script src="js/chart.js"></script>
         <script src="js/app.js"></script>
     </body>
 </html>
