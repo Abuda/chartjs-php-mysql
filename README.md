@@ -1,4 +1,4 @@
-A Chart.js demo
+### A dynamic Chart.js demo
 
 Technologies used:
 
